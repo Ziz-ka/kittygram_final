@@ -10,4 +10,6 @@ RUN pip install gunicorn==20.1.0
 
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi"]
+RUN python manage.py collectstatic --noinput
+
+CMD ["gunicorn", "kittygram_backend.wsgi:application", "--bind", "0.0.0.0:8000"]
